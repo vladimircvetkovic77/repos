@@ -3,7 +3,7 @@
 namespace App\Repositories\Contracts;
 
 
-interface TopicRepository 
+interface UserRepository 
 {
-	
+	public function all();
 }
