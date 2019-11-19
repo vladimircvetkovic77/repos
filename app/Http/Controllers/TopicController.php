@@ -21,7 +21,7 @@ class TopicController extends Controller
 
     public function index()
     {
-    	$topics = $this->topics->all();
+    	$topics = $this->topics->delete(2);
     	$users = $this->users->all();
     	dd($topics);
     }
