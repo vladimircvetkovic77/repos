@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Criteria\CriteriaInterface;
 use App\Repositories\Exceptions\NoEntityDefined;
 use App\Repositories\Contracts\RepositoryInterface;
 
 
-abstract class RepositoryAbstract implements RepositoryInterface
+abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterface
 {
 	protected $entity;
 
@@ -17,7 +18,7 @@ abstract class RepositoryAbstract implements RepositoryInterface
 
 	public function all()
 	{
-		return $this->entity->all();
+		return $this->entity->get();
 	}
 
 	public function find($id)
@@ -54,7 +55,15 @@ abstract class RepositoryAbstract implements RepositoryInterface
 	{
 		$this->find($id)->delete();
 	}
-	
+
+	public function withCriteria(array $criteria)
+	{
+		foreach ($criteria as $criterion) {
+			$this->entity = $criterion->apply($this->entity);
+		}
+		return $this;
+	}
+
 	public function resolveEntity()
 	{
 		if (!method_exists($this, 'entity')) {
