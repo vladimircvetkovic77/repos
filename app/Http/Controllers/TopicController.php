@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Contracts\TopicRepository;
+use App\Repositories\Eloquent\Criteria\ByUser;
+use App\Repositories\Eloquent\Criteria\IsLive;
+use App\Repositories\Eloquent\Criteria\LatestFirst;
 use App\Topic;
 use Illuminate\Http\Request;
-use App\Repositories\Eloquent\Criteria\IsLive;
-use App\Repositories\Contracts\TopicRepository;
-use App\Repositories\Eloquent\Criteria\LatestFirst;
 
 class TopicController extends Controller
 {
@@ -20,8 +21,7 @@ class TopicController extends Controller
     public function index()
     {
     	$topics = $this->topics->withCriteria([
-            new LatestFirst,
-            new IsLive
+            new LatestFirst, new IsLive, new ByUser(auth()->id())
         ])->all();
        
     	return view('topics.index', compact('topics'));
