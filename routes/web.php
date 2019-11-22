@@ -12,6 +12,7 @@
 */
 
 Route::resource('topics', 'TopicController');
+Route::resource('adresses', 'AdressController');
 
 Auth::routes();
 

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Contracts\TopicRepository;
-use App\Repositories\Eloquent\Criteria\ByUser;
-use App\Repositories\Eloquent\Criteria\EagerLoad;
-use App\Repositories\Eloquent\Criteria\IsLive;
-use App\Repositories\Eloquent\Criteria\LatestFirst;
 use App\Topic;
 use Illuminate\Http\Request;
+use App\Repositories\Eloquent\Criteria\{
+    ByUser, EagerLoad, IsLive, LatestFirst
+};
+use App\Repositories\Contracts\TopicRepository;
 
 class TopicController extends Controller
 {
