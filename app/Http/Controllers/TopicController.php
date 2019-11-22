@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\TopicRepository;
 use App\Repositories\Eloquent\Criteria\ByUser;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
 use App\Topic;
@@ -21,7 +22,11 @@ class TopicController extends Controller
     public function index()
     {
     	$topics = $this->topics->withCriteria([
-            new LatestFirst, new IsLive, new ByUser(auth()->id())
+            new LatestFirst,
+            new IsLive,
+            new EagerLoad ([
+                'posts', 'posts.user'
+            ])
         ])->all();
        
     	return view('topics.index', compact('topics'));

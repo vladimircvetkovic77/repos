@@ -23,7 +23,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
 	public function find($id)
 	{
-		return $this->entity->find($id);	
+		return $this->entity->findOrFail($id);	
 	}
 
 	public function findWhere($column, $value)
@@ -33,7 +33,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
 	public function findWhereFirst($column, $value)
 	{
-		return $this->entity->where($column, $value)->first();
+		return $this->entity->where($column, $value)->firstOrFail();
 	}
 
 	public function paginate($perPage = 10)
