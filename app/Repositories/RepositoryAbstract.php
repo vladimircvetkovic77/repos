@@ -53,12 +53,14 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
 	public function delete($id)
 	{
-		$this->find($id)->delete();
+		return $this->find($id)->delete();
 	}
 
 	public function withCriteria(array $criteria)
 	{
 		foreach ($criteria as $criterion) {
+			//criterion je objekat koji je definisan sa new CriteriaClass
+			//kao da je prethodno napisano $criterion = new CriterionClass
 			$this->entity = $criterion->apply($this->entity);
 		}
 		return $this;

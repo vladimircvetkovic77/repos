@@ -13,21 +13,20 @@ class TopicController extends Controller
 {
 	protected $topics;
 	
+
     public function __construct(TopicRepository $topics)
     {
     	$this->topics = $topics;
+        dd($topics);
+      
     }
 
     public function index()
     {
     	$topics = $this->topics->withCriteria([
-            new LatestFirst,
-            new IsLive,
-            new EagerLoad ([
-                'posts', 'posts.user'
-            ])
+            new LatestFirst(), new IsLive(), new EagerLoad ([
+                'posts', 'posts.user'])
         ])->all();
-       
     	return view('topics.index', compact('topics'));
     }
 }

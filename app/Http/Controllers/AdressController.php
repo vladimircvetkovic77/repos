@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Contracts\AdressRepository;
+use App\Adress;
 use Illuminate\Http\Request;
+use App\Repositories\Contracts\AdressRepository;
 
 class AdressController extends Controller
 {
